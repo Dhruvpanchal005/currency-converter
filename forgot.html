@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Reset Password</title>
+    <link rel="stylesheet" href="login.css" />
+  </head>
+  <body>
+    <div class="login-wrapper">
+      <form class="login-form" id="forgot-form">
+        <h2>Reset Password</h2>
+
+        <div class="input-group">
+          <input
+            type="email"
+            id="forgot-email"
+            placeholder="Enter Email"
+            required
+          />
+        </div>
+
+        <div class="input-group">
+          <input
+            type="password"
+            id="new-password"
+            placeholder="New Password"
+            required
+          />
+        </div>
+
+        <button type="submit" class="login-btn">Update Password</button>
+
+        <p style="margin-top: 10px">
+          <a href="login.html" style="color: #2563eb">Back to Login</a>
+        </p>
+      </form>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("forgot-form");
+
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const email = document.getElementById("forgot-email").value;
+          const newPassword = document.getElementById("new-password").value;
+
+          const storedEmail = localStorage.getItem("email");
+
+          if (!storedEmail) {
+            alert("No registered user found!");
+            return;
+          }
+
+          if (email === storedEmail) {
+            localStorage.setItem("password", newPassword);
+            alert("Password Updated Successfully!");
+            window.location.href = "login.html";
+          } else {
+            alert("Email not found!");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
